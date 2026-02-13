@@ -10,16 +10,56 @@ const FullScreenCalendar = ({ headerColor = '#0EA5E9', onSubmit }) => {
   const [selectedDate2, setSelectedDate2] = useState(null);
   const [datesInRange, setDatesInRange] = useState([]);
 
-  const handleDayPress = (day) => {
-    if (!selectedDate1 || (selectedDate1 && selectedDate2)) {
-      setSelectedDate1(day.dateString);
+const handleDayPress = (day) => {
+  const pressed = day.dateString;
+
+
+  if (!selectedDate1) {
+    setSelectedDate1(pressed);
+    setSelectedDate2(pressed);
+    setDatesInRange([pressed]);
+    return;
+  }
+
+
+  if (selectedDate1 && selectedDate2 && selectedDate1 !== selectedDate2) {
+    setSelectedDate1(pressed);
+    setSelectedDate2(pressed);
+    setDatesInRange([pressed]);
+    return;
+  }
+
+ 
+  const isOneDay = selectedDate1 && selectedDate2 && selectedDate1 === selectedDate2;
+
+  if (isOneDay) {
+   
+    if (pressed === selectedDate1) {
+      setSelectedDate1(null);
       setSelectedDate2(null);
       setDatesInRange([]);
-    } else if (!selectedDate2) {
-      setSelectedDate2(day.dateString);
-      calculateDatesInRange(selectedDate1, day.dateString);
+      return;
     }
-  };
+
+  
+    if (pressed < selectedDate1) {
+      setSelectedDate1(pressed);
+      setSelectedDate2(pressed);
+      setDatesInRange([pressed]);
+      return;
+    }
+
+   
+    setSelectedDate2(pressed);
+    calculateDatesInRange(selectedDate1, pressed);
+    return;
+  }
+
+  
+  setSelectedDate2(pressed);
+  calculateDatesInRange(selectedDate1, pressed);
+};
+
 
   const calculateDatesInRange = (start, end) => {
     const range = [];
