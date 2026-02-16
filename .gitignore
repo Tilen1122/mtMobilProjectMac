@@ -1,2 +1,7 @@
-Archiv.zip
-Archiv.zip
+node_modules/
+.expo/
+.expo-shared/
+.DS_Store
+*.log
+android/build/
+ios/build/
