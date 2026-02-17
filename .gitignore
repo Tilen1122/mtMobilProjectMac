@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 node_modules/
 .expo/
 .expo-shared/
@@ -5,3 +6,12 @@ node_modules/
 *.log
 android/build/
 ios/build/
+=======
+.DS_Store
+.expo/
+.expo/shared/
+.log
+*.log
+*.bak
+node_modules/
+>>>>>>> 237d99fa (Cleanup:expo and mac trash)
